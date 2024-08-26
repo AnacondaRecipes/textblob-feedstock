@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-    sha256: 8131c52c630bcdf61d04c359f939c98d5b836a01fba224d9e7ae22fc274e0ccb
+  - url: https://github.com/sloria/TextBlob/archive/refs/tags/{{ version }}.tar.gz
+    sha256: 014eaff24ed9bd5235b6f80d31ad2ec1bbec47fbc6f3e91188967e75e7321357
 
 build:
   number: 0
