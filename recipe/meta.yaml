@@ -17,9 +17,7 @@ build:
 requirements:
   host:
     - python
-    - setuptools
     - pip
-    - wheel
     - flit-core <4
 
   run:
