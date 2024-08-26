@@ -49,8 +49,10 @@ test:
 
 about:
   home: https://github.com/sloria/TextBlob
-  license: MIT
-  license_file: LICENSE
+  license: MIT AND BSD-2-Clause AND BSD-3-Clause
+  license_file:
+    - LICENSE
+    - NOTICE
   summary: 'Simple, Pythonic text processing. Sentiment analysis, part-of-speech tagging, noun phrase parsing, and more.'
   description: 'TextBlob is a Python library for processing textual data. It provides a simple API for diving into common
     natural language processing (NLP) tasks such as part-of-speech tagging, noun phrase extraction, sentiment analysis,
