@@ -10,9 +10,10 @@ source:
     sha256: 014eaff24ed9bd5235b6f80d31ad2ec1bbec47fbc6f3e91188967e75e7321357
 
 build:
-  number: 0
-  skip: True  # [py<36 or s390x]
+  number: 1
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
+  # https://github.com/sloria/TextBlob/blob/0.18.0.post0/pyproject.toml#L20
+  skip: True  # [py<38]
 
 requirements:
   host:
