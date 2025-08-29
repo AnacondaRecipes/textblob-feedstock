@@ -1,52 +1,61 @@
 {% set name = "textblob" %}
-{% set version = "0.18.0.post0" %}
+{% set version = "0.19.0" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  - url: https://github.com/sloria/TextBlob/archive/refs/tags/{{ version }}.tar.gz
-    sha256: 014eaff24ed9bd5235b6f80d31ad2ec1bbec47fbc6f3e91188967e75e7321357
+  url: https://github.com/sloria/TextBlob/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 0fb422e903d8b640dc0d955ac79421b0a536d9c79ece11dbe238b9a60d8f48c3
 
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
-  # https://github.com/sloria/TextBlob/blob/0.18.0.post0/pyproject.toml#L20
-  skip: True  # [py<38]
+  skip: true  # [py<39]
 
 requirements:
   host:
     - python
     - pip
     - flit-core <4
-
   run:
     - python
-    - nltk >=3.8
+    - nltk >=3.9
 
 test:
   source_files:
     - tests
-    - pyproject.toml
   imports:
     - textblob
+    - textblob._text
+    - textblob.base
+    - textblob.classifiers
+    - textblob.decorators
     - textblob.en
-    - textblob.unicodecsv
+    - textblob.en.inflect
+    - textblob.en.np_extractors
+    - textblob.en.parsers
+    - textblob.en.sentiments
+    - textblob.en.taggers
+    - textblob.exceptions
+    - textblob.formats
+    - textblob.inflect
+    - textblob.mixins
+    - textblob.np_extractors
+    - textblob.parsers
+    - textblob.sentiments
+    - textblob.taggers
+    - textblob.tokenizers
+    - textblob.utils
   commands:
     - pip check
-    # To do all tests you need to download nltk assets. textblob.download corpora is insufficient for testing needs.
-    #- python -c "import nltk; nltk.download('punkt_tab')"
-    #- python -c "import nltk; nltk.download('averaged_perceptron_tagger_eng')"
-    #- python -m textblob.download_corpora
-    # We'll skip nltk tests for now though locally they did all pass. 2024-08-26 RK.
-    - pytest -v tests -m "not slow" --ignore=tests/test_blob.py --ignore=tests/test_classifiers.py --ignore=tests/test_tokenizers.py
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest -v tests
   requires:
     - pip
     - pytest
-    # Adding numpy to test some of the classifying features of the library
     - numpy
-
 
 about:
   home: https://github.com/sloria/TextBlob
@@ -54,12 +63,12 @@ about:
   license_file:
     - LICENSE
     - NOTICE
-  summary: 'Simple, Pythonic text processing. Sentiment analysis, part-of-speech tagging, noun phrase parsing, and more.'
-  description: 'TextBlob is a Python library for processing textual data. It provides a simple API for diving into common
-    natural language processing (NLP) tasks such as part-of-speech tagging, noun phrase extraction, sentiment analysis,
-    classification, translation, and more.'
-  license_family: MIT
-  doc_url: https://textblob.readthedocs.io/en/dev/
+  summary: Simple, Pythonic text processing. Sentiment analysis, part-of-speech tagging, noun phrase parsing, and more.
+  description: 'TextBlob is a Python library for processing textual data. It provides a simple API for diving into common::
+    - natural language processing (NLP) tasks such as part-of-speech tagging, noun phrase extraction, sentiment analysis,
+    - "classification, translation, and more.'
+  license_family: OTHER
+  doc_url: https://textblob.readthedocs.io/en/dev
   dev_url: https://github.com/sloria/TextBlob
 
 extra:
